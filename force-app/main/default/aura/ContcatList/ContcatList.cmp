@@ -1,0 +1,103 @@
+<aura:component >
+    <!-- <aura:handler name="init" value="{!this}" action="{!c.doInit}"/> -->
+    <aura:attribute name="showSaveCancelBtn" type="boolean"/>
+    <aura:attribute name="ConList" type="Contact"/>
+    <aura:attribute name="nameEditMode" type="boolean" default="false" />
+    <aura:attribute name="EmailEditMode" type="boolean" default="false" />
+    <aura:attribute name="PhoneEditMode" type="boolean" default="false" />
+    
+    
+    <!--Table Row Start-->  
+    <tr>
+        <td ondblclick="{!c.inlineEditName}" class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <span class="slds-grid slds-grid_align-spread">
+                <aura:if isTrue="{!v.nameEditMode == false}">
+                    <span class="slds-truncate" title="Name">{!v.ConList.Name}</span>
+                    <button onclick="{!c.inlineEditName}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Name">
+                        <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                    </button>
+                    
+                    <!-- Inline Edit Section in else case-->  
+                    <aura:set attribute="else">
+                        <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                            <div class="slds-popover__body">
+                                <div class="slds-form-element slds-grid slds-wrap">
+                                    <div class="slds-form-element__control slds-grow">
+                                        <ui:inputText class="slds-input inputFieldWidth"
+                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                      aura:id="conName"
+                                                      blur="{!c.closeNameBox}"
+                                                      change="{!c.onNameChange}"
+                                                      required="true"
+                                                      label="Name"
+                                                      value="{!v.ConList.Name}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="form-end" tabindex="0"></span>
+                        </section>  
+                    </aura:set>  
+                </aura:if> 
+            </span>
+        </td>
+        
+        <td ondblclick="{!c.inlineEditPhone}" class="{! v.showErrorClass == true ? 'slds-cell-edit slds-has-error' : 'slds-cell-edit'}">
+            <span class="slds-grid slds-grid_align-spread">
+                <aura:if isTrue="{!v.PhoneEditMode == false}">
+                    <span class="slds-truncate" title="Phone">{!v.ConList.MobilePhone}</span>
+                    <button onclick="{!c.inlineEditPhone}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Phone">
+                        <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                    </button>  
+                    <aura:set attribute="else">
+                        <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                            <div class="slds-popover__body">
+                                <div class="slds-form-element slds-grid slds-wrap">
+                                    <div class="slds-form-element__control slds-grow">
+                                        <ui:inputText class="slds-input inputFieldWidth"
+                                                      labelClass="slds-form-element__label slds-form-element__label_edit slds-no-flex"
+                                                      aura:id="conPhone"
+                                                      blur="{!c.closePhoneBox}"
+                                                      change="{!c.onPhoneChange}"
+                                                      label="Phone"
+                                                      value="{!v.ConList.MobilePhone}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="form-end" tabindex="0"></span>
+                        </section>  
+                    </aura:set>  
+                </aura:if> 
+            </span>
+        </td>
+        
+        <td ondblclick="{!c.inlineEditEmail}" class="slds-cell-edit">
+            <span class="slds-grid slds-grid_align-spread">
+                <aura:if isTrue="{!v.EmailEditMode == false}">
+                    <span class="slds-truncate" title="Email">{!v.ConList.Email}</span>
+                    <button onclick="{!c.inlineEditEmail}" class="slds-button slds-button_icon slds-cell-edit__button slds-m-left_x-small" tabindex="0" title="Edit Email">
+                        <lightning:icon iconName="utility:edit" size="xx-small" alternativeText="edit"/>
+                    </button>
+                    
+                    <aura:set attribute="else">
+                        <section  tabindex="0" class="slds-popover slds-popover_edit" role="dialog" style="position: absolute; top: 0px">
+                            <div class="slds-popover__body">
+                                <div class="slds-form-element slds-grid slds-wrap">
+                                    <div class="slds-form-element__control slds-grow">
+                                        <label class="slds-form-element__label">Email</label>
+                                        <ui:inputText aura:id="ConEmail"
+                                                      class="slds-select inputFieldWidth"
+                                                      blur="{!c.closeEmailBox}"
+                                                      change="{!c.onEmailChange}"
+                                                      value="{!v.ConList.Email}"
+                                                      />
+                                    </div>
+                                </div>
+                            </div>
+                            <span id="form-end" tabindex="0"></span>
+                        </section>  
+                    </aura:set>  
+                </aura:if> 
+            </span>
+        </td> 
+    </tr>
+</aura:component>

@@ -1,0 +1,17 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="Account" type="Account"/>
+    <aura:attribute name="showButton" type="boolean" default="false"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+     <lightning:card footer="Card Footer" title="Hello">
+        <aura:set attribute="actions">
+            <aura:if isTrue="{!v.showButton}">
+            <lightning:button label="View Details"/>
+            </aura:if>
+        </aura:set>
+         {!v.Account.Name}<br/>
+         {!v.Account.Id}<br/>
+         {!v.Account.Description}<br/>
+         {!v.Account.Phone}<br/>
+         {!v.Account.Industry}
+             </lightning:card>
+</aura:component>

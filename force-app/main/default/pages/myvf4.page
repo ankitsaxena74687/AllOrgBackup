@@ -1,0 +1,17 @@
+<apex:page controller="vfclass4" >
+    <apex:form >
+       <apex:outputPanel >
+                <apex:selectList size="5" value="{!selectedIndustry}"  >
+                    <apex:selectoptions value="{!industryPickList}" />
+                    <apex:actionSupport event="onclick" action="{!afterSelectedIndustry}" reRender="outputpanelId" />
+                </apex:selectList>
+                </apex:outputPanel>
+        <apex:outputPanel id="outputpanelId">
+            {!selectedIndustry}
+        <apex:repeat value="{!accList}" var="acc">
+            {!acc.Name}
+            
+            </apex:repeat>
+        </apex:outputPanel>
+ </apex:form>
+</apex:page>

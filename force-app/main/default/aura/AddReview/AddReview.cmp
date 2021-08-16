@@ -1,0 +1,25 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	
+    <aura:attribute name="account" type="Account"/>
+    
+    <aura:attribute name="addReview" type="MyReviews__c"/>
+    <aura:attribute name="simpleAddReview" type="MyReviews__c"/>
+    <aura:attribute name="recordError" type="String" access="private"/>
+   <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+ 
+    <force:recordData aura:id="AddReview"
+                      recordId=""
+                      targetFields="{!v.addReview}"
+                      targetRecord="{!v.simpleAddReview}"
+                      fields="Name,Account__c"
+                      recordUpdated="{!c.onRecordUpdated}"
+                      targetError="{!v.recordError}"
+                      />
+    
+      <lightning:card footer="Add Reviews" title="REview">
+        <aura:set attribute="actions">
+<lightning:button label="Submit" iconName="utility:save" onclick="{!c.AddReview}" />
+</aura:set>
+      <lightning:inputRichText value="{!v.addReview.Your_Reviews__c}" placeholder="Type something interesting"/>
+      </lightning:card>
+</aura:component>

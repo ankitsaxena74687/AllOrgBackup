@@ -1,0 +1,6 @@
+<aura:component implements="flexipage:availableForAllPagetypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+    <aura:attribute name="appRecord" type="Appointment_ID__c[]"/>
+    <aura:handler name="CreateApp" event="c:CreateAppointmentEvent" action="{!doHandleEvent}"/>
+    <c:CreateAppointment PatientId="{!v.recordId}"/>
+    <c:AppointmentReview AppointmentRecords="{!v.appRecord}"/>
+</aura:component>

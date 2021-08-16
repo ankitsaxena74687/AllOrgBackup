@@ -1,0 +1,95 @@
+<template>
+<div class="slds-form-element__control" >
+<div class="slds-combobox_container  slds-m-bottom_large slds-m-top_small">
+<div class={switchclass} aria-expanded="true" aria-haspopup="listbox" role="combobox">
+    <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right" role="none">
+        <input type="text"
+                class="slds-input slds-combobox__input slds-combobox__input-value "
+                id="combobox-id-21" aria-autocomplete="list" aria-controls="listbox-id-11"
+                    onkeyup={handleChange} role="textbox" placeholder="Search for account,Location...."
+                    style="height: 2.5rem;border-radius: 0.5rem;" disabled={disableinput} />
+            
+        <template if:true={selectedValue}>
+            <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                    title="Clear the text input" onclick={clearOption} >
+                    <lightning-icon icon-name="utility:clear" class="slds-input__icon slds-input__icon_right" style="margin-right: -8px;" alternative-text="Approved" size="x-small">
+                    </lightning-icon>                    </button>
+        </template>
+        <template if:false={isloading}>
+            <template if:false={selectedValue}>
+            <span class="slds-icon_container slds-icon-utility-search slds-icon slds-input__icon slds-input__icon_left">
+                <lightning-icon icon-name="utility:search" class="slds-icon-utility-search slds-input__icon slds-input__icon_right slds-searchIcon" alternative-text="Approved" size="x-small">
+                </lightning-icon>
+            </span>
+        </template>
+        </template>
+        <template if:true={isloading}>
+            <span class="slds-icon_container  slds-icon slds-input__icon slds-input__icon_left">
+            <lightning-spinner alternative-text="Loading..." variant="brand" size="small" class="slds-input__icon slds-input__icon_right" style="margin-right: -8px;" >
+            </lightning-spinner>
+            </span>
+        </template>
+        </div>
+    <div id="listbox-id-11" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+            role="listbox">
+        <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+            
+                <template if:true={resultList}>  
+                    <template for:each={resultList} for:item="result">
+                        <li key={result.RecordId} role="presentation" class="slds-listbox__item" data-id={result.RecordId}
+                            data-value={result} data-typevalue={result.DataType} data-name={result.DataValue} data-latitude={result.Latitude} data-longitude={result.Longitude} onclick={optionClickHandler}>
+                            <div id={result.RecordId}
+                                    class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                    role="option">
+                                <span class="slds-media__figure slds-listbox__option-icon">
+                                    
+                                    <lightning-icon icon-name={result.iconname} alternative-text="Account" title="Account"></lightning-icon>
+                                    
+                                </span>
+                                <span class="slds-media__body">
+                                    <span class="" title="">
+                                        <div class="slds-clearfix slds-p-left--medium">
+                                            <div class="slds-float_left">
+                                                <span class="slds-listbox__option-text slds-listbox__option-text_entity">{result.DataValue}</span> 
+                                            </div>
+                                        </div>
+                                        <div class="slds-clearfix slds-p-left--medium slds-m-top_x-small">
+                                            <div class="slds-float_left">
+                                                <span class="slds-listbox__option-meta slds-listbox__option-meta_entity">  
+                                                    {result.DataType}&nbsp; * &nbsp;
+                                                                    {result.City}&nbsp;
+                                                                    {result.State}&nbsp;
+                                                                    {result.Zip}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </span>
+                            </div>
+                            
+                        </li>
+                    </template>
+                </template> 
+                <template if:true={noresultfound}>                       
+                <li role="presentation" class="slds-listbox__item">
+                    <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                        <span class="slds-media__figure slds-listbox__option-icon">
+                        <!--     <lightning-icon icon-name="action:reject" alternative-text="Account" title="Account" size="x-small"></lightning-icon> -->
+                        </span>
+                        <span class="slds-media__body">
+                            <span class="slds-truncate" title="">
+                                <span><strong>No Result Found</strong></span>   
+                            </span>
+                        </span>
+                    </div>
+                </li>
+                </template>       
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+<template if:true={showpopup}>
+<c-create-Workorder openmodal={showpopup} parentselectedrecord={parentrecord} onclearhomesearch={clearOption}></c-create-Workorder>
+</template>
+</template>

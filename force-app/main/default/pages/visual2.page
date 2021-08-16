@@ -1,0 +1,21 @@
+<apex:page >
+ <h1> Hello World </h1>
+    
+    <apex:pageBlock title="My First Page">
+        
+        <apex:pageBlockSection title="Fruits I Like">
+            1.Apple
+            2.Cherry
+            3.Grapes
+        
+        {! $User.FirstName & ' ' & $User.LastName }
+            
+            Todays date is {! TODAY()}
+            today is {! DAY(TODAY())}
+            
+            
+            {! IF($User.isActive,$User.FirstName,'iactive')}
+        </apex:pageBlockSection>
+    
+    </apex:pageBlock>
+</apex:page>

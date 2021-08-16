@@ -1,0 +1,91 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="SearchAllAccounts" >
+	
+ <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="updateAcc" type="Account" default="{'sObjectYpe' : 'Account' , 'Name' : '','Type' :'' }"/>
+     <aura:attribute name="IdInput" type="String"/>
+    <aura:attribute name="nameInput" type="String"/>
+    <aura:attribute name="typeInput" type="String"/>
+    <aura:attribute name="industryInput" type="String"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="data_List" type="Object[]"/>
+    <aura:handler name="init" value="{!this}" action="{!c.init }"/>
+    <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+      <aura:html tag="style">
+         .slds_pop{
+        position: absolute !important;
+        right: 16.7rem;
+        width:14rem;
+        }
+    </aura:html>
+    
+    <div style="height: 300px">
+        <lightning:datatable
+            columns="{! v.columns }"
+            data="{! v.data }"
+            keyField="id"
+            errors="{! v.errors }"
+            hideCheckboxColumn="true"
+            draftValues="{! v.draftValues }"
+            onsave="{! c.handleSaveEdition }"
+            onrowaction="{!c.handleRowAction}"
+        />
+    </div>
+    <div>
+    <aura:if isTrue="{!v.isModalOpen}">
+        <!-- Modal/Popup Box starts here-->
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open slds-p-around_x-large">
+            <div class="slds-modal__container">
+                <!-- Modal/Popup Box Header Starts here-->
+                <header class="slds-modal__header" style=" background-color: lightgray; ">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closePopUp }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate"><b>Edit Account </b></h2>
+                </header>
+                <!--Modal/Popup Box Body Starts here-->
+                <div class="slds-modal__content slds-p-around--large slds-p-around_small" id="modal-content-id-1">
+                    <!-- lightning input's to enter data to create New Mapping -->
+                    <div class="slds-grid slds-gutters slds-p-around_small">
+                        <div class="slds-col">
+                            <span>
+                                <div class="slds-p-around_x--small">
+                                    <lightning:input name="input1" label="name" value="{!v.nameInput}" />
+									<!--<c:SearchExistingRecords aura:id="StarkCompany" label="Stark Company" inputValue1="{!v.StarkCoInput}" /> -->
+                                </div>
+                                <div class="slds-p-around_x--small slds-p-top--medium">
+                                    <lightning:input name="input2" label="type" value="{!v.typeInput}" />
+									<!--<c:SearchExistingRecords aura:id="Location" label="Location" inputValue1="{!v.LocationInput}" /> -->
+                                </div>
+                                <div class="slds-p-around_x--small slds-p-top--medium">
+                                   <lightning:input name="input3" label="industry" value="{!v.industryInput}" />
+									 <!--<c:SearchExistingRecords aura:id="LegacyCo" label="Legacy Company" inputValue1="{!v.LegacyCoInput}" /> -->
+                                </div>
+                            </span>
+                        </div>
+                        
+                    </div>
+                    <!--close -->
+                    
+                </div>
+                <!--Modal/Popup Box Footer Starts here-->
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="brand"
+                                      label="Save"
+                                      title="Save Mapping"
+                                      onclick="{!c.EditAcc}"/>
+                    
+                    <lightning:button variant="neutral"
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{!c.closePopUp }"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    
+ </aura:if>
+    </div>
+    
+</aura:component>

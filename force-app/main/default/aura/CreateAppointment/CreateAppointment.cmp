@@ -1,0 +1,27 @@
+<aura:component implements="flexipage:availableForAllPagetypes,flexipage:availableForRecordHome,force:hasRecordId" access="global">
+   <aura:attribute name="Appointment" type="Appointment_ID__c" default="{
+                                                                         'sobjectType':'Appointment_ID__c',
+                                                                         'Appointment_Type__c':'',
+                                                                         'Doctor_Appointed__c':'',
+                                                                         'Patient_Id__c':'',
+                                                                         'Appointment_Date__c':''
+                                                                         }"  /> 
+    <aura:attribute name="PatientId" type="String"/>
+    <aura:registerEvent name="CreateApp" type="c:CreateAppointmentEvent"/>
+    
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:input label="Patient Id" required="true" aura:id="newApp" value="{!v.PatientId}"/><br/>
+            <lightning:input label="Doctor Appointed" required="false" aura:id="newApp" value="{!v.Appointment.Doctor_Appointed__c}"/>
+        </div>
+        <div class="slds-col slds-size_1-of-2">
+            <lightning:input label="Appointment Type" required="false" aura:id="newApp" value="{!v.Appointment.Appointment_Type__c}"/><br/>
+            <lightning:input label="Appointment Date " required="false" aura:id="newApp" value="{!v.Appointment.Appointment_Date__c}"/>
+        <lightning:button name="Add to Review" label="Add to Review" variant="brand" onclick="{!c.handleReview}"/>
+        </div>
+       
+    </div>	
+    <br/>
+      
+
+</aura:component>

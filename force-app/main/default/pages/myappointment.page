@@ -1,0 +1,16 @@
+<apex:page standardController="Appointment_ID__c" showHeader="false" sidebar="false" applyBodyTag="false">
+hiiiii 
+<div class="header" >
+    <apex:image url="{!URLFOR($Resource.hospital)}" style="width:100%;" /> <br/>
+</div>
+
+ <div style="width:100%;height:615px;" class="content">
+   
+    <div style="width:35%;float:left;font-family: arial, sans-serif;line-height: 0.1;"><p style="line-height: 0.1;font-size:12px"><b>Invoice To:</b></p>
+
+         <p style="line-height: 0.1;font-size:12px">{!Appointment_ID__c.Patient_Id__c}</p>
+         <p style="line-height: 0.1;font-size:12px">{!Appointment_ID__c.f_update__c}</p>
+         
+   </div>
+   </div>
+</apex:page>

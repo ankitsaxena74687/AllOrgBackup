@@ -1,0 +1,13 @@
+<apex:page Controller="vfclass2" showHeader="true" >
+   <apex:pageblock title="Search Appointments">
+    <apex:form >
+    Type Patients's name :<apex:inputText value="{!keyword}"/>                                
+     <apex:commandButton value="search Appointments" action="{!Search}"/>    
+     <apex:pageBlockTable value="{!appList}" var="a">
+     <apex:column value="{!a.name}"/>
+      <apex:column value="{!a.Appointment_Type__c}"/>
+      <apex:column value="{!a.Fee__c}"/>
+     </apex:pageBlockTable> 
+     </apex:form>
+    </apex:pageblock>
+</apex:page>

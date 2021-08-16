@@ -1,0 +1,26 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="getAccount" type="Account"/>
+    <aura:attribute name="selectedTabId" type="String"/>
+    <aura:handler event="c:Account_Selected_Event" action="{!c.onSelectedAccount}"/>
+    
+    <force:recordData aura:id="recordLoader"
+                      recordId="{!v.getAccount.Id}"
+                      targetFields="{!v.getAccount}"
+                      fields="Name,Description,Phone,Industry"
+                      recordUpdated="{!c.onRecordUpdated}"
+                      />
+    This is my details
+    
+        <lightning:tabset selectedTabId="{!v.selectedTabId}">
+            <lightning:tab label="Details">
+                <c:Account_Detail Account="{!v.getAccount}"/>
+            </lightning:tab>
+            <lightning:tab label="Reviews" title="2nd tab extended title">
+                Two Content !
+            </lightning:tab>
+            <lightning:tab label="Add review" >
+                <c:AddReview account="{!v.getAccount}"/>
+            </lightning:tab>
+        </lightning:tabset>
+    
+</aura:component>

@@ -1,0 +1,14 @@
+<aura:component implements="force.hasRecordId,flexipage:availableForAllPageTypes">
+	<aura:handler name="init" value="{!this}" action="c.doinit"/> 
+    <aura:attribute type="product2[]" name="productList"  access="public" />
+    
+    <div class="slds-p-around_small">
+    <aura:iteration items="{!v.productList}" var="pro">
+        <lightning:card title="{!pro.name}" footer="{!con.name}">
+           <aura:set attribute="actions">
+            <lightning:button name="{!pro.Id}" label="View Details" variant="brand" onclick="{!c.doRedirect}"/>
+            </aura:set>
+        </lightning:card>
+     </aura:iteration>
+    </div>
+</aura:component>

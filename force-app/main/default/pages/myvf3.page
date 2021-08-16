@@ -1,0 +1,35 @@
+<apex:page standardController="Contact" extensions="vfclass3" showHeader="true" >
+<apex:form >
+<apex:pageblock >
+<apex:pageBlockButtons >
+<apex:commandButton value="Edit" action="{!Edited}" rerender="table"/>
+<apex:commandButton value="Save" action="{!Saved}"/> 
+<apex:commandButton value="Delete" action="{!Deleted}" rerender="table"/> 
+<apex:commandButton value="new" action="{!newcon}"/>   
+</apex:pageBlockButtons>
+
+<apex:pageBlockSection title="Search Contacts">
+<apex:inputfield value="{!Contact.AccountId}" label="Search Account"/>
+<apex:commandButton value="search" action="{!Search}" rerender="table"/>                               
+
+<apex:pageBlockTable value="{!wrlist}" var="w" id="table" align="center" >
+<apex:column headerValue="Delete"><apex:inputCheckbox value="{!w.check_del}" id="deleteId"/></apex:column>
+<apex:column headerValue="Edit"><apex:inputCheckbox value="{!w.check_edit}" id="editId"/> </apex:column>
+
+<apex:column value="{!w.con.Firstname}" rendered="{!(!w.check_edit)}"/>
+<apex:column ><apex:inputField value="{!w.con.Firstname}" rendered="{!w.check_edit}"/></apex:column>
+
+<apex:column value="{!w.con.Lastname}" rendered="{!(!w.check_edit)}"/>
+<apex:column ><apex:inputField value="{!w.con.Lastname}" rendered="{!w.check_edit}"/> </apex:column>
+
+<apex:column value="{!w.con.MobilePhone}" rendered="{!(!w.check_edit)}"/>
+<apex:column > <apex:inputField value="{!w.con.MobilePhone}" rendered="{!w.check_edit}"/></apex:column>
+
+<apex:column value="{!w.con.email}" rendered="{!(!w.check_edit)}"/>
+<apex:column > <apex:inputField value="{!w.con.email}" rendered="{!w.check_edit}"/></apex:column>
+
+</apex:pageBlockTable> 
+</apex:pageBlockSection>  
+</apex:pageBlock> 
+</apex:form>
+</apex:page>

@@ -1,0 +1,25 @@
+<apex:page standardController="Contact" extensions="TestVFclass">
+<apex:form > 
+<apex:pageBlock >
+<apex:pageBlockSection title="Search Contact">
+
+<apex:inputField value="{!Contact.AccountId}" label="Search Account"/>
+<apex:commandButton value="Search" action="{!search}" rerender="table"/>
+<apex:pageBlockTable value="{!conlist}" var="c" id="table">
+<apex:column >
+<apex:commandButton value="Edit" onclick="window.open('/{!c.id}/e?retURL={!c.id}')"/>
+</apex:column>
+<apex:column >
+<apex:commandButton value="Delete" action="{!deleted}" reRender="table" immediate="true">
+<apex:param name="rowid" value="{!c.id}" assignTo="{!delcon}"/>
+</apex:commandButton>
+</apex:column>
+<apex:column value="{!c.name}"/>
+ <apex:column value="{!c.MobilePhone}"/>
+  <apex:column value="{!c.Email}"/>    
+</apex:pageBlockTable>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:form>
+
+</apex:page>

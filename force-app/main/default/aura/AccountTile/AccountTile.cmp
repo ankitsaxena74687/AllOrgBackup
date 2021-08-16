@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="myAccount" type="Account"/>
+    <aura:attribute name="isSelected" type="Boolean" default="false"/>
+    <aura:registerEvent name="AccountSelect" type="c:AccountSelectEvent"/>
+    <aura:registerEvent name="AccountSelected" type="c:Account_Selected_Event"/>
+    <lightning:button class="{!v.isSelected ? 'tile selected' : 'tile'}" onclick="{!c.selectTile}" value="{!v.myAccount}">
+        <h1>  {!v.myAccount.Name} </h1>
+        <h1>{!v.myAccount.Type}</h1>
+        <h1>{!v.myAccount.Id}</h1>
+        <h1> isSelected : {!v.isSelected} </h1>
+    </lightning:button>
+      
+</aura:component>

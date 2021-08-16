@@ -1,0 +1,19 @@
+<apex:page Controller="vfClass" showHeader="true" >
+    <apex:form >                                
+        
+      <table>
+  <apex:repeat value="{!pList}" var="p">
+    <tr>
+      <td><apex:outputText value="{!p.Name}"/></td>
+      <apex:repeat value="{!p.Appointments__r}" var="app">
+         <td><apex:outputText value="{!app.id}"/></td>
+      </apex:repeat>
+    </tr>
+  </apex:repeat>
+</table>
+                                        
+        <apex:commandButton value="save" action="{!Save}"/>
+                 
+        
+    </apex:form>
+</apex:page>

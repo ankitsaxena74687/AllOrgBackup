@@ -1,0 +1,18 @@
+<aura:component controller="ConList" implements="force.hasRecordId,flexipage:availableForAllPageTypes">
+    <aura:handler name="init" value="{!this}" action="c.doinit"/>
+    <aura:attribute type="contact[]" name="contactList"  access="public" />
+    <div class="slds-p-around_small">
+    <aura:iteration items="{!v.contactList}" var="con">
+        <lightning:card title="{!con.MobilePhone}" footer="{!con.name}">
+           <aura:set attribute="actions">
+            <lightning:button name="{!con.Id}" label="View Details" variant="brand" onclick="{!c.doRedirect}"/>
+            </aura:set>
+            <p class="slds-p-horizontal_small">
+               {!con.DOB__c} <br/>{!con.Email} <br/>
+               </p>
+        </lightning:card>
+     </aura:iteration>
+    </div>
+          
+    
+</aura:component>

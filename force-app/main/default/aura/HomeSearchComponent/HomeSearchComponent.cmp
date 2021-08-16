@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+	<aura:attribute name="inputValue" type="String" />
+    <B>Home search component</B>
+    <input type="text"
+                               class="slds-input slds-combobox__input slds-combobox__input-value "
+                               id="combobox-id-21" aria-autocomplete="list" aria-controls="listbox-id-11"
+                               autoComplete="off" onkeyup="{!c.searchHandler}" role="textbox" placeholder="Search for account, contractor, building..."
+                               value="{!v.inputValue}" style="height: 2.5rem;border-radius: 0.5rem;" disabled="{!v.isSaved}">
+                           
+                        </input>
+</aura:component>

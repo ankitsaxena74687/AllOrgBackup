@@ -1,0 +1,16 @@
+<apex:page standardController="Account
+">
+<apex:image url="{!URLFOR($Resource.CafeIdeasLogo)}" />
+<apex:pageBlock >
+<apex:pageBlockSection collapsible="false" columns="3">
+
+        <apex:pageblocksectionitem >Invoice to: <br/>
+        <apex:outputField value="{Account.name}"/>
+        
+        </apex:pageblocksectionitem>
+        <apex:pageblocksectionitem >Bill to:</apex:pageblocksectionitem>
+        <apex:pageblocksectionitem >Date:</apex:pageblocksectionitem>
+      
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:page>

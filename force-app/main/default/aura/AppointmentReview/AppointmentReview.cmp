@@ -1,0 +1,21 @@
+<aura:component >
+    <aura:attribute name="AppointmentRecords" type="Object"/>
+    
+    <div>
+        <aura:iteration items="{!v.AppointmentRecords}" var="rec">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col slds-size_1-of-4">
+                    {!rec.Patient_Id__c}"/></div>
+                <div class="slds-col slds-size_1-of-4">
+                    {!rec.Doctor_Appointed__c}"
+                </div>
+                <div class="slds-col slds-size_1-of-4">
+                    {!rec.Appointment_Type__c}" </div>
+                <div class="slds-col slds-size_1-of-4">
+                    {!rec.Appointment_Date__c}" &nbsp; &nbsp; &nbsp;
+                    <a href="JavaScript:void(0);" onclick="{!c.RemoveRecord}"> Remove </a>
+                </div>
+            </div>
+        </aura:iteration>
+    </div>
+</aura:component>

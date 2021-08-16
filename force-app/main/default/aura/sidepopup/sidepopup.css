@@ -1,0 +1,8 @@
+.THIS.btn-popover-container {
+    display : inline-block;
+    }
+
+
+.THIS.btn-popover-container THIS.btn-popover-title, .THIS.btn-popover-container .THIS.btn-popover-content {
+    display : none;
+    }
