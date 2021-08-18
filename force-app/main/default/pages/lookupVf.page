@@ -1,0 +1,15 @@
+<apex:page standardController="Contact" extensions="lookupVF" showHeader="true">
+<apex:form >
+<apex:pageblock >
+<apex:pageBlockSection title="Search Contacts" >
+<apex:inputfield value="{!Contact.AccountId}" label="Search Account"/>
+<apex:commandButton value="search" action="{!Search}" rerender="table"/>                               
+<apex:pageBlockTable value="{!conlist}" var="con" id="table" align="center">
+ <apex:column value="{!con.name}"/>
+ <apex:column value="{!con.Phone}"/>
+ <apex:column value="{!con.email}"/>
+ </apex:pageBlockTable> 
+</apex:pageBlockSection>
+</apex:pageblock>     
+  </apex:form>
+</apex:page>

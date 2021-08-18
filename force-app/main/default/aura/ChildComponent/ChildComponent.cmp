@@ -1,0 +1,13 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	<aura:attribute name="MyParentName" type="String"/>
+    <aura:attribute name="MyFirstName" type="String"/>
+    <aura:attribute name="MyLastName" type="String"/>
+    <aura:method name="myMethod" action="{!c.executeMyMethod}">
+        <aura:attribute name="param1" type="String"/>
+        <aura:attribute name="param2" type="String"/>
+    </aura:method>
+    Hello, I am child and my parent is {!v.MyParentName}
+    <br/>
+    <lightning:input name="FName" label="FirstName" value="{!v.MyFirstName}" />
+    <lightning:input name="LName" label="Last Name" value="{!v.MyLastName}"/>
+</aura:component>

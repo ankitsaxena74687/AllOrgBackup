@@ -1,0 +1,19 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" controller="AllChatsController" >
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:attribute name="PList" type="Chat__c[]" />
+    <aura:attribute name="recId" type="string" />
+    
+    <aura:if isTrue="{!v.PList.length>0}">
+        <aura:iteration items="{!v.PList}" var="item">
+            {!item.Doctor_name__c}
+            <div class="slds-p-around_medium lgc-bg">
+            <lightning:button variant="brand" label="Brand" title="Brand action" onclick="{! c.handleClick }" />
+        </div>
+        </aura:iteration>
+        <aura:set attribute="else">
+            SORRY,NO CHATS YET !!!!!!!!!!!!!!!!!!!
+            <lightning:button name="Chat" variant="brand-outline" label="lets Chat" title="chat" onclick="{!c.handleClick}" />
+        </aura:set>
+    </aura:if>
+    
+</aura:component>

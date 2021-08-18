@@ -1,0 +1,21 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="Account_Search_Controller" >
+    <aura:attribute name="AccountList" type="Account[]"/>
+    <aura:attribute name="SelectedAccount" type="Account" default="null"/>
+    <aura:handler name="AccountSelect" event="c:AccountSelectEvent" action="{!c.onAccountSelect}"/>
+    <aura:method name="search" action="{!c.doSearch}">
+        <aura:attribute name="type" type="String"/>
+    </aura:method>
+   
+    <lightning:layout multipleRows="true">
+     <aura:if isTrue="{!v.AccountList.length>0}">
+   <aura:iteration items="{!v.AccountList}" var="acc">
+    <lightning:layoutItem size="3" flexibility="grow">
+       <c:AccountTile myAccount="{!acc}" isSelected="{!acc.Id==v.SelectedAccount.Id ? true : false}"/>
+        </lightning:layoutItem>
+    </aura:iteration>
+         <aura:set attribute="else">
+             SORRY,NO RECORDS !!!!!!!!!!!!!!!!!!!
+         </aura:set>
+         </aura:if>
+    </lightning:layout>
+</aura:component>

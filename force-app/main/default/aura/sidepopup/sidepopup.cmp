@@ -1,0 +1,17 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes" access="global" >
+	
+    <h1> MY SIDE POPUP </h1>
+    
+    <div class="btn-popover-container">
+    <lightning:button aura:id="btn" class="btn btn-link popover-btn" name="New button" variant="brand-outline" label="show popup" title="Side popup" onclick="{!c.handleClick}" />
+    <div class="btn-popover-title">
+        Popover Title
+    </div>
+    <div class="btn-popover-content">
+        
+            <lightning:input label="TextVal" type="Text" />
+       
+    </div>
+</div>
+
+</aura:component>

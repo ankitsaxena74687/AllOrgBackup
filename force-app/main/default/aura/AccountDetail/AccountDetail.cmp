@@ -1,0 +1,9 @@
+<aura:component>
+    <aura:attribute name="AccountId" type="String"/>
+    <div><lightning:recordForm
+                               recordId="{!v.AccountId}"
+                               objectApiName="Account"
+                               layoutType="Full"
+                               mode="view" />
+    </div>
+</aura:component>

@@ -1,0 +1,5 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" controller="QuickContactCheckClass" access="global">
+    <aura:registerEvent name="navEvt" type="force:navigateToSObject"/>
+    <aura:attribute type="String" name="field" default="This is default"/>
+    <lightning:button label="Create Contact" variant="brand" onclick="{!c.quickContact}"/>
+</aura:component>

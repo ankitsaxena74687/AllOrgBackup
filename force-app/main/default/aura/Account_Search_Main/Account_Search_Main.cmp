@@ -1,0 +1,11 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    <aura:handler name="searchAccounts" event="c:searchAccounts" action="{!c.onSearchAccount}"/>
+    
+    <lightning:card title="Account Form">
+        <c:Account_Search/>
+    </lightning:card>
+    
+    <lightning:card  title="Matching Accounts">
+        <c:Account_Search_Result aura:id="Account_Search_Result"/>
+    </lightning:card>
+</aura:component>

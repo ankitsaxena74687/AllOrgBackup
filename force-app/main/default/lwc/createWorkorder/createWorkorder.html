@@ -1,0 +1,153 @@
+<template>
+<template if:true={openmodal}>
+    <!-- Modal/Popup Box LWC starts here -->
+    <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+        <div class="slds-modal__container">
+            <!-- Modal/Popup Box LWC header here -->
+            <header class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close" onclick={closeModal}>
+                    <lightning-icon icon-name="utility:close"
+                        alternative-text="close"
+                        variant="inverse"
+                        size="small" ></lightning-icon>
+                    <span class="slds-assistive-text">Close</span>
+                </button>
+                <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Create Work Order</h2>
+            </header>
+            <!-- Modal/Popup Box LWC body starts here -->
+            <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-2">
+                <div class=" slds-section slds-is-open slds-border_right " id="ServiceContractSection1">
+                        <!--section header-->
+                        <h3 class="slds-section__title slds-theme_shade">
+                            <button aria-controls="ServiceContractForm" class="slds-button slds-section__title-action ">
+                                <span onclick={toggleSection} id="ServiceContractSection11">
+                                    <lightning-icon icon-name="utility:switch" size="x-small" class="slds-section__title-action-icon slds-button__icon_left" alternative-text="button icon"></lightning-icon>
+                                </span>
+                                <span class="slds-truncate " title="Service contract"><b> Work Order </b></span>
+                            </button>
+                        </h3>
+                        <!--section body-->
+                        <div class="slds-section__content" id="ServiceContractForm">
+                            <div class="slds-grid slds-m-bottom--x-small">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <c-common-Lookup lookuptype='Location' parentid='' placeholdervalue='Search Locations....' iconname='standard:location' namevalue={locationname} onrecordselection={handlerecordselection} showrequired={showlocationmsg}></c-common-Lookup>
+                                    <template if:true={showlocationmsg}><div class="slds-show  slds-p-top--xx-small" style="color:rgb(194, 57, 52);font-size:var(--lwc-fontSize2,0.75rem);"> Please Select Location </div></template>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <lightning-input name="OrderType" label="Order Type" value={contracttype} disabled=true></lightning-input>
+                                </div>
+                            </div> 
+                            <div class="slds-grid slds-m-bottom--x-small ">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <lightning-input name="GPSCoordinates" label="GPS Coordinates" value={gpscoordinates}></lightning-input>
+                            <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                            title="show map" onclick={showmapmarker} >
+                            <lightning-icon icon-name="action:map" class="slds-icon_container slds-icon-utility-search slds-icon slds-input__icon slds-input__icon_left"  alternative-text="showmap" size="x-small">
+                            </lightning-icon> </button>
+                            <template if:true={showmap}>
+                                <c-show-Map openmodal={showmap} coordinates={gpscoordinates} ></c-show-Map>  
+                            </template>
+                                </div>
+                                <template if:true={priorityvalues.data}>
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <lightning-combobox
+                                    name="PriorityValues"
+                                    label="Priority"
+                                    value={Priority_value}
+                                    placeholder="--Select Option--"
+                                    options={priorityvalues.data.values}
+                                    onchange={handlepicklistchnage}
+                                    ></lightning-combobox>
+                                        <template if:true={showprioritymsg}><div class="slds-show  slds-p-top--xx-small" style="color:rgb(194, 57, 52);font-size:var(--lwc-fontSize2,0.75rem);"> Please Select Priority </div></template> 
+                                </div>
+                            </template>
+                            </div> 
+                               <!-- Loader -->
+                            <div if:true={isLoading} class="slds-is-relative">
+                             <lightning-spinner alternative-text="Loading..." variant="brand">
+                             </lightning-spinner>
+                            </div>
+                            <div class="slds-grid slds-m-bottom--x-small">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <c-common-Lookup lookuptype='Account' parentid='' placeholdervalue='Search Customer....' iconname='standard:account' namevalue={customername} onrecordselection={handlerecordselection} showrequired={showaccountmsg}></c-common-Lookup>
+                                    <template if:true={showaccountmsg}> <div class="slds-show  slds-p-top--xx-small" style="color:rgb(194, 57, 52);font-size:var(--lwc-fontSize2,0.75rem);"> Please Select Account </div></template>
+                                </div>
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <template if:true={quoterequiredvalues.data}>
+                                        <div class="slds-col slds-size_1-of-2">
+                                            <lightning-combobox
+                                            name="QuoteRequiredValues"
+                                            label="Quote required"
+                                            value={quoterequired}
+                                            placeholder="--Select Option--"
+                                            options={quoterequiredvalues.data.values}
+                                            onchange={handlepicklistchnage}
+                                                ></lightning-combobox>
+                                        </div>
+                                        </template>
+                                </div>
+                            </div> 
+                             
+                            <div class="slds-grid slds-m-bottom--x-small">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <c-common-Lookup lookuptype='Contact' parentid='' placeholdervalue='Search Contacts....' iconname='standard:contact' onrecordselection={handlerecordselection} showrequired={showcontactmsg}></c-common-Lookup>
+                                    <template if:true={showcontactmsg}><div class="slds-show  slds-p-top--xx-small" style="color:rgb(194, 57, 52);font-size:var(--lwc-fontSize2,0.75rem);"> Please Select Contact </div></template>
+                                </div>
+                                <template if:true={sendtointacctvalues.data}>
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <lightning-combobox
+                                    name="SendToIntacctValues"
+                                    label="Send to Intacct"
+                                    value={sendtointacct_value}
+                                    placeholder="--Select Option--"
+                                    options={sendtointacctvalues.data.values}
+                                    onchange={handlepicklistchnage}
+                                        ></lightning-combobox>
+                                </div>
+                                </template>
+                            </div> 
+                            <div class="slds-grid slds-m-bottom--x-small">
+                                <div class="slds-col slds-size_1-of-2 slds-p-around_x-small">
+                                    <c-common-Lookup lookuptype='Lead' parentid='' placeholdervalue='Search Projects....' iconname='standard:lead' onrecordselection={handlerecordselection} showrequired={showleadmsg}></c-common-Lookup>
+                                    <template if:true={showleadmsg}><div class="slds-show  slds-p-top--xx-small" style="color:rgb(194, 57, 52);font-size:var(--lwc-fontSize2,0.75rem);"> Please Select Project </div></template>
+                                </div>
+                            </div>  
+                        </div>
+                    </div>
+                    
+                    
+                    <div class=" slds-section slds-is-open slds-border_right " id="ServiceContractSection2">
+                        <!--section header-->
+                        <h3 class="slds-section__title slds-theme_shade ">
+                            <button aria-controls="ServiceContractForm" class="slds-button slds-section__title-action ">
+                                <span onclick={toggleSection} id="ServiceContractSection21">
+                                    <lightning-icon icon-name="utility:switch" size="x-small" class="slds-section__title-action-icon slds-button__icon_left" alternative-text="button icon"></lightning-icon>
+                                </span>
+                                <span class="slds-truncate " title="Service contract"><b> Installed Product  </b></span>
+                            </button>
+                        </h3>
+                        <!--section body-->
+                        <div class="slds-section__content" id="ServiceContractForm2">
+                            <div class="slds-form-element slds-p-left_large">
+                                <div class=" slds-form-element__control slds-m-bottom--medium slds-p-right_medium slds-size_12-of-12 slds-size_xx-large">
+                                    <c-multi-Select-Lookup onrecordsselection={setproductlist} showrequired={showproductmsg} ></c-multi-Select-Lookup>
+                                    <template if:true={showproductmsg}><div class="slds-show" style="color:rgb(194, 57, 52);font-size:var(--lwc-fontSize2,0.75rem);"> Please Select Products </div></template>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                
+            </div>
+            <!-- Modal/Popup Box LWC footer starts here -->
+            <footer class="slds-modal__footer">
+                <button class="slds-button slds-button_neutral" onclick={closeModal} title="Cancel">Cancel</button>
+                <button class="slds-button slds-button_brand" onclick={createWO} title="Create">Create Workorder</button>
+            </footer>
+        </div>
+    </section>
+    <div class="slds-backdrop slds-backdrop_open"></div>
+    
+</template>
+
+</template>

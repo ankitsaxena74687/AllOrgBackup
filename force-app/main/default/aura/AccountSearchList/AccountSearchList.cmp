@@ -1,0 +1,54 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome" controller="AccountSearchAuraService" access="global">
+    <aura:attribute name="AcList" type="Object"/> 
+    <aura:attribute name="ConList" type="Contact[]"/>
+    <aura:attribute name="AccountId" type="String"/>
+    <lightning:overlayLibrary aura:id="overlayLib"/>
+    <aura:attribute name="showSaveCancelBtn" type="boolean" default="false" description="flag for rendered save and cancel buttons in aura:if "/>
+    <div> <aura:iteration items="{!v.AcList}" var="item">
+        <lightning:card title="{!item.Name}" footer="{!item.Id}" iconName="custom:custom7">
+            <div><img src="{!$Resource.AccountImg}"/></div>
+            <aura:set attribute="actions">
+                <div class="slds-col slds-size_2-of-3">
+                    {!item.Phone}<br/>
+                    {!item.AccountNumber}<br/>
+                </div>
+              <lightning:button name="{!item.Id}" label="View Details" variant="brand" onclick="{!c.showDetails}" />
+                <br/><br/><br/>
+                 <lightning:button name="{!item.Id}" label="View Contacts" variant="brand" onclick="{!c.showContact}" />
+            <br/><br/><br/>
+                 <lightning:button name="{!item.Id}" label="Create Contact" variant="brand" onclick="{!c.quickContact}" />
+            
+            </aura:set>
+        </lightning:card>   
+     </aura:iteration>
+    </div>
+ <aura:if isTrue="{!v.ConList !=null}">
+    <div class="slds-m-around_large">
+        <!-- use aura:if for show/hide buttons --> 
+        <aura:if isTrue="{!v.showSaveCancelBtn}">
+            <!--button for save and cancel Record after Inline Edit-->
+            <lightning:buttonGroup class="slds-m-around_medium">
+                <lightning:button label="Cancel" onclick="{!c.cancel}"/>
+                <lightning:button label="Save" onclick="{!c.Save}" variant="success"/>
+            </lightning:buttonGroup>
+        </aura:if> 
+ 
+        <!--Data Table-->     
+        <table class="slds-table slds-table_bordered slds-table_cell-buffer">
+            <thead>
+                <tr class="slds-text-title--caps"> 
+                  <th scope="col"><div class="slds-truncate" title="Contact Name">Contact Name</div></th>
+                  <th scope="col"><div class="slds-truncate" title="Phone">Phone</div></th>
+                  <th scope="col"><div class="slds-truncate" title="Email">Email</div></th>
+                </tr>
+            </thead>
+            
+            <tbody>
+                <aura:iteration items="{!v.ConList}" var="con">
+                    <c:ContcatList ConList="{!con}" showSaveCancelBtn="{!v.showSaveCancelBtn}"/>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+    </aura:if>
+</aura:component>

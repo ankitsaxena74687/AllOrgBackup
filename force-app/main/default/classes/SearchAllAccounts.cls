@@ -2,6 +2,7 @@ public class SearchAllAccounts {
 @AuraEnabled
     public static list<Account> getAllAccounts(){
         System.debug('Changes');
+        System.debug('logLevel');
         list<Account> mylist=new list<Account>([select id,name,type,industry,createdDate from account]);
         return mylist;
     }

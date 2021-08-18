@@ -1,0 +1,13 @@
+<apex:page standardController="contact" extensions="vfclass5">
+<apex:form >
+<apex:pageBlock title="Contact Search">
+<apex:inputField value="{!contact.AccountId}"/>
+<apex:actionSupport event="onchange" action="{!accountSelected}" rerender="table"/>
+<apex:pageBlockTable value="{!conList}" var="c" id="table">
+     <apex:column value="{!c.name}"/>
+      <apex:column value="{!c.Phone}"/>
+      <apex:column value="{!c.email}"/>
+     </apex:pageBlockTable> 
+</apex:pageBlock>
+</apex:form>
+</apex:page>

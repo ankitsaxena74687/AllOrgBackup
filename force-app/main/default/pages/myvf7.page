@@ -1,0 +1,18 @@
+<apex:page standardcontroller="Contact" extensions="vfclass7">
+ <apex:form >
+<apex:pageblock >
+<apex:pageBlockSection >
+<apex:inputfield value="{!Contact.AccountId}" label="Search Account"/>
+<apex:variable value="{!Contact.AccountId}"  var=" OldA"/>
+
+<apex:commandButton value="search" action="{!Search}" rerender="table"/>                              
+
+<apex:pageBlockTable value="{!conlist}" var="c" id="table">
+ <apex:column value="{!c.name}"/>
+ <apex:column value="{!c.Phone}"/>
+ <apex:column value="{!c.email}"/>
+ </apex:pageBlockTable> 
+</apex:pageBlockSection>
+</apex:pageblock>     
+  </apex:form>
+</apex:page>

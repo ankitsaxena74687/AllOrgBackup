@@ -1,0 +1,27 @@
+<apex:page controller="vfclass6">
+  <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockButtons >
+          <apex:commandButton value="Show Selected Accounts" action="{!processSelected}" rerender="table2"/>
+            </apex:pageBlockButtons>
+             
+            <apex:pageblockSection title="All Accounts" collapsible="false" columns="2">
+             <apex:pageBlockTable value="{!wrapAccountList}" var="accWrap" id="table" title="All Accounts">
+                    <apex:column >
+                        <apex:inputCheckbox value="{!accWrap.selected}" id="inputId"/>
+                    </apex:column>
+                    <apex:column value="{!accWrap.a.Name}" />
+                    <apex:column value="{!accWrap.a.BillingState}" />
+                    <apex:column value="{!accWrap.a.Phone}" />
+                </apex:pageBlockTable>  
+                
+                
+                  <apex:pageBlockTable value="{!selectedList}" var="c" id="table2" title="Selected Accounts">
+                    <apex:column value="{!c.Name}" headerValue="Account Name"/>
+                    <apex:column value="{!c.BillingState}" headerValue="Billing State"/>
+                    <apex:column value="{!c.Phone}" headerValue="Phone"/>
+                </apex:pageBlockTable>      
+          </apex:pageblockSection>      
+        </apex:pageBlock>  
+        </apex:form>
+</apex:page>

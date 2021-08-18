@@ -1,0 +1,25 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId" access="global" controller="Account_Search_Controller">
+    
+    <aura:attribute name="SelectedType" type="String" default="No Choice"/>
+    <aura:attribute name="AccountTypeList" type="String[]" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:registerEvent name="searchAccounts" type="c.searchAccounts"/>
+    <lightning:layout horizontalAlign="center" verticalAlign="end">
+     
+            <lightning:layoutItem padding="around-small">
+           <lightning:select aura:id="type" value="{!v.SelectedType}" name="select1" onchange="{!c.onTypeChange}" label="Account Type ?" required="true">
+                <option value="">-Select Type-</option>
+                
+                <aura:iteration items="{!v.AccountTypeList}" var="item">
+                    <option value="{!item}">{!item}</option>
+                </aura:iteration>
+            </lightning:select>
+        </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+            <lightning:button name="search" variant="destructive-text" label="Search All" title="Search" onclick="{!c.onSearch }"/>
+       </lightning:layoutItem>
+            <lightning:layoutItem padding="around-small">
+            <lightning:button name="New" variant="brand-outline" label="New Account" title="Create New Account" onclick="{!c.handleClick}" />
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

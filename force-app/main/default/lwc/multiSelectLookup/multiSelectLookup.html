@@ -1,0 +1,74 @@
+<template>
+    <label class="slds-form-element__label slds-no-flex">Product</label>
+    <div class="slds-form-element__control" >
+    <div class="slds-combobox_container  slds-m-bottom_large slds-m-top_small" style="margin: auto;">
+    <div class={switchclass} aria-expanded="true" aria-haspopup="listbox" role="combobox">
+        <div class={getdivclass} role="none">
+                <input type="text"
+                class="slds-lookup__search-input slds-input inputSize slds-p-around_xx-small "
+                id="combobox-id-21" aria-autocomplete="list" aria-controls="listbox-id-11"
+                    onkeyup={handleChange} role="textbox" placeholder="Search Products...."
+                    style="height: 1.5rem;border-radius: 0.5rem;" disabled={disableinput}/>
+                    <span class="slds-icon_container slds-icon-utility-search slds-icon slds-input__icon slds-input__icon_left">
+                            <lightning-icon icon-name="utility:search" class="slds-icon-utility-search slds-input__icon slds-input__icon_right slds-searchIcon" alternative-text="Approved" size="x-small">
+                            </lightning-icon>
+                        </span>
+                </div>
+        <div> 
+            <template if:true={selectedProductList}>
+                <template for:each={selectedProductList} for:item="prod">
+                    <lightning-pill key={prod.Id} class="slds-m-around_xx-small" label={prod.Name} name={prod.Id} onremove={clearpill}>
+                        <lightning-icon icon-name="standard:product" variant="circle"  alternative-text="product"></lightning-icon>
+                    </lightning-pill>
+                </template>
+            </template>
+        </div>
+        <div id="listbox-id-11" class="slds-dropdown slds-dropdown_length-5 slds-dropdown_fluid"
+                role="listbox">
+            <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                  <template if:true={resultList}>  
+                        <template for:each={resultList} for:item="result">
+                            <li key={result.Id} role="presentation" class="slds-listbox__item" data-id={result.Id}
+                                data-value={result} data-name={result.Name} onclick={optionClickHandler}>
+                                <div id={result.RecordId}
+                                        class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small"
+                                        role="option">
+                                    <span class="slds-media__figure slds-listbox__option-icon">
+                                        
+                                        <lightning-icon icon-name="standard:product" alternative-text="Product" title="Product"></lightning-icon>
+                                        
+                                    </span>
+                                    <span class="slds-media__body">
+                                        <span class="" title="">
+                                            <div class="slds-clearfix slds-p-left--medium">
+                                                <div class="slds-float_left">
+                                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{result.Name}</span> 
+                                                </div>
+                                            </div>
+                                        </span>
+                                    </span>
+                                </div>
+                                
+                            </li>
+                        </template>
+                    </template> 
+                    <template if:true={noresultfound}>                       
+                    <li role="presentation" class="slds-listbox__item">
+                        <div class="slds-media slds-listbox__option slds-listbox__option_plain slds-media_small" role="option">
+                            <span class="slds-media__figure slds-listbox__option-icon">
+                            <!--     <lightning-icon icon-name="action:reject" alternative-text="Account" title="Account" size="x-small"></lightning-icon> -->
+                            </span>
+                            <span class="slds-media__body">
+                                <span class="slds-truncate" title="">
+                                    <span><strong>No Result Found</strong></span>   
+                                </span>
+                            </span>
+                        </div>
+                    </li>
+                    </template>       
+            </ul>
+        </div>
+    </div>
+    </div>
+    </div>
+</template>
